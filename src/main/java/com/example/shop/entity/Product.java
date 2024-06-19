@@ -32,11 +32,11 @@ public class Product {
     @Column(name = "count")
     private Integer count;
 
-    @Column(name = "lastCountChange")
+    @Column(name = "last_count_change")
     @CreationTimestamp
     private LocalDateTime lastCountChange;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
 
