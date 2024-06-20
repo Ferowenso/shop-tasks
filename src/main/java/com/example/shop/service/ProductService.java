@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.aop.LogExecutionTime;
 import com.example.shop.dto.ProductDTO;
 import com.example.shop.entity.Product;
 import com.example.shop.exception.ProductNotFoundException;
@@ -19,6 +20,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    @LogExecutionTime
     public UUID createProduct(ProductDTO productDTO){
         Product product = Product.builder()
                 .name(productDTO.getName())
@@ -31,15 +33,18 @@ public class ProductService {
 
     }
 
+    @LogExecutionTime
     public Product getProductById(UUID id){
         return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Not Found"));
     }
 
+    @LogExecutionTime
     public void deleteProductById(UUID id){
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Not Found"));
         productRepository.delete(product);
     }
 
+    @LogExecutionTime
     public UUID updateProduct(UUID uuid, ProductDTO productDTO){
         Product product = productRepository.findById(uuid).orElseThrow(() -> new ProductNotFoundException("Not Found"));
 
@@ -56,6 +61,7 @@ public class ProductService {
         return productRepository.save(product).getId();
     }
 
+    @LogExecutionTime
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
