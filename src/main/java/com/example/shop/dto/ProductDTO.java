@@ -12,18 +12,14 @@ import lombok.Setter;
 @Builder
 public class ProductDTO {
 
-    @NotBlank
     private String name;
 
     private String description;
 
-    @NotNull
     private Double price;
 
-    @NotNull
     private Integer count;
 
-    @NotNull
     private Categories category;
 
 }

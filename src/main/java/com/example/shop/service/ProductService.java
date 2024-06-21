@@ -42,6 +42,7 @@ public class ProductService {
     public void deleteProductById(UUID id){
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Not Found"));
         productRepository.delete(product);
+
     }
 
     @LogExecutionTime
