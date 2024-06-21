@@ -1,5 +1,7 @@
 package com.example.shop.service;
 
+import com.example.shop.ProductBuilder;
+import com.example.shop.ProductDTOBuilder;
 import com.example.shop.dto.ProductDTO;
 import com.example.shop.entity.Categories;
 import com.example.shop.entity.Product;
@@ -34,14 +36,11 @@ public class ProductServiceTest {
     @Test
     void when_save_product_it_should_return_product_uuid() {
 
-        ProductDTO productDTO = ProductDTO.builder()
-                .build();
+        ProductDTO productDTO = ProductDTOBuilder.productDTO().build();
 
         UUID expected = UUID.randomUUID();
 
-        Product product = Product.builder()
-                .id(expected)
-                .build();
+        Product product = ProductBuilder.product().build();
 
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
@@ -62,9 +61,7 @@ public class ProductServiceTest {
     void get_product_by_id_it_should_return_product(){
         UUID expected = UUID.randomUUID();
 
-        Product product = Product.builder()
-                .id(expected)
-                .build();
+        Product product = ProductBuilder.product().build();
 
         when(productRepository.findById(any(UUID.class))).thenReturn(Optional.of(product));
 
@@ -137,23 +134,16 @@ public class ProductServiceTest {
         Integer oldCount = 10;
         Integer newCount = 15;
 
-        ProductDTO productDTO = ProductDTO.builder()
-                .count(newCount)
-                .build();
+        ProductDTO productDTO = ProductDTOBuilder.productDTO().withCount(newCount).build();
 
-        UUID exceptedUUID = UUID.randomUUID();
-
-        Product product = Product.builder()
-                .id(exceptedUUID)
-                .count(oldCount)
-                .build();
+        Product product = ProductBuilder.product().withCount(oldCount).build();
 
         LocalDateTime oldTime = product.getLastCountChange();
 
-        when(productRepository.findById(exceptedUUID)).thenReturn(Optional.of(product));
+        when(productRepository.findById(any(UUID.class))).thenReturn(Optional.of(product));
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
-        productService.updateProduct(exceptedUUID, productDTO);
+        productService.updateProduct(product.getId(), productDTO);
 
         assertNotNull(product.getLastCountChange());
         assertNotEquals(oldTime, product.getLastCountChange());

@@ -34,8 +34,8 @@ public class ProductController {
         return new ResponseEntity<>(productService.updateProduct(uuid, productDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteProduct(@RequestBody UUID uuid){
+    @DeleteMapping("{uuid}")
+    public ResponseEntity deleteProduct(@PathVariable UUID uuid){
         productService.deleteProductById(uuid);
         return new ResponseEntity(HttpStatus.OK);
     }
