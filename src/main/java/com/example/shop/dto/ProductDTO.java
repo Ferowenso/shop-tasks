@@ -22,4 +22,6 @@ public class ProductDTO {
 
     private Categories category;
 
+    private Boolean isAvailable;
+
 }

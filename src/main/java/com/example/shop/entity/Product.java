@@ -43,4 +43,7 @@ public class Product {
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
     private Categories category;
+
+    @Column(name = "is_available", columnDefinition = "boolean default true")
+    private Boolean isAvailable;
 }

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Ferowenso
+      changes:
+        - addColumn:
+            tableName: product
+            columns:
+              - column:
+                  name: is_available
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

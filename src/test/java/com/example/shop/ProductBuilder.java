@@ -19,6 +19,7 @@ public class ProductBuilder {
     public static final Integer DEFAULT_COUNT = 10;
     private static final LocalDateTime DEFAULT_CREATED_AT = LocalDateTime.now();
     private static final LocalDateTime DEFAULT_LAST_CHANGE_COUNT = LocalDateTime.now();
+    public static final Boolean DEFAULT_IS_AVAILABLE = true;
 
 
     private UUID uuid = DEFAULT_UUID;
@@ -29,6 +30,8 @@ public class ProductBuilder {
     private Integer count = DEFAULT_COUNT;
     private LocalDateTime createdAt = DEFAULT_CREATED_AT;
     private LocalDateTime lastChangeCount = DEFAULT_LAST_CHANGE_COUNT;
+    private Boolean isAvailable = DEFAULT_IS_AVAILABLE;
+
 
     public static ProductBuilder product(){
         return new ProductBuilder();
@@ -73,6 +76,11 @@ public class ProductBuilder {
         return this;
     }
 
+    public ProductBuilder withIsAvailable(Boolean isAvailable){
+        this.isAvailable = isAvailable;
+        return this;
+    }
+
     public Product build(){
         return Product.builder()
                 .id(uuid)
@@ -83,6 +91,7 @@ public class ProductBuilder {
                 .description(description)
                 .createdAt(createdAt)
                 .lastCountChange(lastChangeCount)
+                .isAvailable(isAvailable)
                 .build();
     }
 

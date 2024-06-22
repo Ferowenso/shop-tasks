@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.dto.ProductDTO;
+import com.example.shop.dto.ProductFilter;
 import com.example.shop.entity.Product;
 import com.example.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,11 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
+
+    @PostMapping("search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestBody ProductFilter productFilter){
+        return new ResponseEntity<>(productService.searchProducts(productFilter), HttpStatus.OK);
     }
 
 }

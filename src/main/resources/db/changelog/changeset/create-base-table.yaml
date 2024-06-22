@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: first
+      id: 1
       author: Ferowenso
       changes:
         - createTable:
